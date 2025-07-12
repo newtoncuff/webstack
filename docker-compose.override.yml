@@ -1,0 +1,29 @@
+# Docker Compose Override for Development
+# This file provides convenient shortcuts for common development tasks
+
+services:
+  # Override for easier log access during development
+  logging:
+    environment:
+      - LOKI_LOG_LEVEL=debug
+    volumes:
+      # Mount custom Loki configuration for development
+      - ./logging/config/loki.yml:/etc/loki/local-config.yaml:ro
+
+  log-collector:
+    # Add debug logging for Promtail
+    environment:
+      - ENVIRONMENT=development
+    # Uncomment for debug mode
+    # command: -config.file=/etc/promtail/config.yml -log.level=debug
+
+  # Optional: Enable debug mode for other services
+  # api:
+  #   environment:
+  #     - DEBUG=true
+  #     - LOG_LEVEL=debug
+
+  # website:
+  #   environment:
+  #     - FLASK_DEBUG=1
+  #     - LOG_LEVEL=debug

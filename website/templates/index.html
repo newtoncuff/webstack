@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ project_name }} - Coming Soon</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo pulse">{{ project_name }}</div>
+        <div class="coming-soon">Coming Soon</div>
+        {% if environment and environment != 'production' %}
+        <div class="environment">Environment: {{ environment.title() }}</div>
+        {% endif %}
+        <div class="description">
+            We're working hard to bring you something amazing. 
+            Stay tuned for updates!
+        </div>
+    </div>
+    
+    <div class="footer">
+        © 2025 {{ project_domain }} - All rights reserved
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>
