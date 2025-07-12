@@ -1,4 +1,4 @@
-# Annotyze.com Docker Setup
+# <website_domain> Docker Setup
 
 This project consists of multiple Docker containers that work together to provide a complete web application stack with monitoring and logging.
 
@@ -23,8 +23,8 @@ This project consists of multiple Docker containers that work together to provid
    ```bash
    mkdir ssl
    # Copy your SSL certificates to the ssl directory:
-   # ssl/annotyze.com.crt
-   # ssl/annotyze.com.key
+   # ssl/<website_domain>.crt
+   # ssl/<website_domain>.key
    ```
 
 3. **Start all services**:
@@ -38,9 +38,9 @@ This project consists of multiple Docker containers that work together to provid
    - API Health: http://localhost:8080/api/health
 
 5. **For production** (with SSL):
-   - Website: https://www.annotyze.com
-   - API: https://www.annotyze.com/api/is_alive
-   - API Health: https://www.annotyze.com/api/health
+   - Website: https://www.<website_domain>
+   - API: https://www.<website_domain>/api/is_alive
+   - API Health: https://www.<website_domain>/api/health
 
 ## Services Details
 
@@ -50,7 +50,7 @@ This project consists of multiple Docker containers that work together to provid
 - **Credentials**:
   - Username: `nalan`
   - Password: `password`
-  - Database: `annotyze_db`
+  - Database: `<website_name>_db`
 
 ### API Endpoints
 - `GET /` - API status
@@ -63,7 +63,7 @@ This project consists of multiple Docker containers that work together to provid
 
 ### Proxy Configuration
 - **Local testing**: http://localhost:8080 (port 8080)
-- **Production**: https://www.annotyze.com (port 8443, requires SSL setup)
+- **Production**: https://www.<website_domain> (port 8443, requires SSL setup)
 - Routes `/api/*` requests to the API container
 
 ### Logging System
@@ -107,7 +107,7 @@ The main environment variables are defined in the root `.env` file:
 # Database Configuration
 DB_USER=nalan
 DB_PASSWORD=password
-DB_NAME=annotyze_db
+DB_NAME=<website_name>_db
 
 # Ports
 API_PORT=3081
@@ -141,12 +141,12 @@ docker-compose up --build -d
 ## SSL Certificate Setup
 
 For production use, place your SSL certificates in the `ssl` directory:
-- `ssl/annotyze.com.crt` - SSL certificate
-- `ssl/annotyze.com.key` - SSL private key
+- `ssl/<website_domain>.crt` - SSL certificate
+- `ssl/<website_domain>.key` - SSL private key
 
 ## Network
 
-All services communicate through a dedicated Docker network (`annotyze_network`) for security and isolation.
+All services communicate through a dedicated Docker network (`<website_name>_network`) for security and isolation.
 
 ## Volumes
 
@@ -170,6 +170,6 @@ curl http://localhost:8080/api/is_alive
 curl http://localhost:8080/api/health
 
 # Production (with SSL)
-curl https://www.annotyze.com/api/is_alive
-curl https://www.annotyze.com/api/health
+curl https://www.<website_domain>/api/is_alive
+curl https://www.<website_domain>/api/health
 ```
