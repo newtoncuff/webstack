@@ -1,0 +1,8 @@
+# Add to your .gitignore file
+__pycache__/
+*.py[cod]
+*$py.class
+*.cer
+*.crt
+*.key
+*.env
